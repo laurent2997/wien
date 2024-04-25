@@ -87,8 +87,7 @@ async function loadLines(url) {
     style: function(feature){
       return {
       color = "#2ECC40"
-      }
-      
+      };
     }
     onEachFeature: function (feature, layer) {
       console.log(feature);
