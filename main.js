@@ -18,8 +18,10 @@ let themaLayer = {
   sights: L.featureGroup().addTo(map),
   lines: L.featureGroup().addTo(map),
   stops: L.featureGroup().addTo(map),
-  Fußgängerzonen: L.featureGroup(),
-  hotels: L.featureGroup(),
+  Fußgängerzonen: L.featureGroup().addTo(map),
+  hotels: L.markerClusterGroup({
+    disableClusteringAtZoom: 16
+  }).addTo(map),
 }
 
 // Hintergrundlayer
@@ -203,9 +205,37 @@ async function loadHotels(url) {
   let geojson = await response.json();
   //console.log(geojson);
   L.geoJSON(geojson, {
+    pointToLayer: function(feature, latlng){
+      
+      console.log(feature.properties.KATEGORIE_TXT);
+    let HotelKategorie = feature.properties.KATEGORIE_TXT;
+    let iconName;
+    if(HotelKategorie=="1*"){
+      iconName="hotel_1star";
+    }else if(HotelKategorie=="2*"){
+      iconName="hotel_2stars";
+    }else if(HotelKategorie=="3*"){
+      iconName="hotel_3stars";
+    }else if(HotelKategorie=="4*"){
+      iconName="hotel_4stars";
+    }else if(HotelKategorie=="5*"){
+      iconName="hotel_5stars";
+    }else if(HotelKategorie=="nicht kategorisiert"){
+      iconName="hotel_0star";
+    }
+    return L.marker(latlng,{
+      icon: L.icon({
+        iconUrl: `icons/${iconName}.png`,
+        iconAnchor: [16,37],
+        popupAnchor: [0,-37]
+      })
+    })
+    },
+
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
+      
       layer.bindPopup(`
         <h4>${feature.properties.BETRIEB}</h4>
         <h5><hotel>Hotel ${feature.properties.KATEGORIE_TXT}</h5></hotel>
