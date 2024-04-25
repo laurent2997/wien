@@ -129,9 +129,9 @@ let stephansdom = {
         console.log(feature.properties.NAME);
         layer.bindPopup(`
         <h4><adress>${feature.properties.ADRESSE}</adress></h4> 
-        <i class="fa-regular fa-clock"></i><time> ${feature.properties.ZEITRAUM}</time>
+        <i class="fa-regular fa-clock"></i><time> ${feature.properties.ZEITRAUM||"dauerhaft"}</time>
         <br>
-        <i class="fa-solid fa-circle-info"></i><exception> ${feature.properties.AUSN_TEXT}</exception>   
+        <i class="fa-solid fa-circle-info"></i><exception> ${feature.properties.AUSN_TEXT||"ohne Ausnahme"}</exception>   
         `)
       }
     }).addTo(themaLayer.Fußgängerzonen);
