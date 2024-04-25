@@ -15,10 +15,10 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup(),
+  sights: L.featureGroup().addTo(map),
   lines: L.featureGroup(),
   stops: L.featureGroup(),
-  Fußgängerzonen: L.featureGroup().addTo(map),
+  Fußgängerzonen: L.featureGroup(),
   hotels: L.featureGroup(),
 }
 
@@ -64,6 +64,17 @@ async function loadSights(url) {
   let geojson = await response.json();
   //console.log(geojson);
   L.geoJSON(geojson, {
+    pointToLayer: function(feature, latlng){
+     
+      return L.marker(latlng,{
+        icon: L.icon({
+          iconUrl: "icons/photo.png",
+          iconAnchor:[16,37],
+          popupAnchor: [0,-37]
+        })
+      });
+    
+    },
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
@@ -100,6 +111,8 @@ async function loadLines(url) {
         lineColor="#AAAAAA";
       }else if(lineName=="Orange Line"){
         lineColor="#FF851B ";
+      }else{
+        //Vielleicht kommen noch andere Linien dazu...
       }
       return {
       color:lineColor,
