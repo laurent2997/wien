@@ -86,7 +86,7 @@ async function loadLines(url) {
   L.geoJSON(geojson, {
     style: function(feature){
       return {
-color = "#2ECC40"
+      color = "#2ECC40"
       }
       
     }
