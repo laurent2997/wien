@@ -85,10 +85,18 @@ async function loadLines(url) {
   //console.log(geojson);
   L.geoJSON(geojson, {
     style: function(feature){
+      console.log(feature.properties.LINE_NAME);
+      let lineName = feature.properties.LINE_NAME;
+      let lineColor="black";
+      if (lineName=="Red Line"){
+        lineColor="#FF4136";
+      }else if(lineName=="Yellow Line"){
+        lineColor="#FFDC00 "
+      }
       return {
-      color = "#2ECC40"
+      color=lineColor,
       };
-    }
+    },
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.LINE_NAME);
