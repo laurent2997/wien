@@ -91,10 +91,18 @@ async function loadLines(url) {
       if (lineName=="Red Line"){
         lineColor="#FF4136";
       }else if(lineName=="Yellow Line"){
-        lineColor="#FFDC00 "
+        lineColor="#FFDC00 ";
+      }else if(lineName=="Blue Line"){
+        lineColor="#0074D9";
+      }else if(lineName=="Green Line"){
+        lineColor="#2ECC40";
+      }else if(lineName=="Grey Line"){
+        lineColor="#AAAAAA";
+      }else if(lineName=="Orange Line"){
+        lineColor="#FF851B ";
       }
       return {
-      color=lineColor,
+      color:lineColor,
       };
     },
     onEachFeature: function (feature, layer) {
