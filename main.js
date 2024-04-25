@@ -132,6 +132,15 @@ async function loadLines(url) {
 }
 loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json")
 
+/*
+bus_1.png // Red
+bus_2.png // Yellow
+bus_3.png // Blue
+bus_4.png // Green
+bus_5.png // Grey
+bus_6.png // Orange
+*/
+
 async function loadStops(url) {
   //console.log("Loading", url);
   let response = await fetch(url);
