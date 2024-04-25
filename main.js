@@ -84,6 +84,12 @@ async function loadLines(url) {
   let geojson = await response.json();
   //console.log(geojson);
   L.geoJSON(geojson, {
+    style: function(feature){
+      return {
+color = "#2ECC40"
+      }
+      
+    }
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.LINE_NAME);
